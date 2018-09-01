@@ -65,11 +65,19 @@ extension VideosViewController: UICollectionViewDelegateFlowLayout {
         if UIDevice.current.orientation == UIDeviceOrientation.portrait ||
             UIDevice.current.orientation == UIDeviceOrientation.portraitUpsideDown{
             width = self.view.frame.size.width - 2 * minimumSpacing
-            height = width * 4 / 3
+
+
+
+
+
         } else {
             width = (self.view.frame.size.width - 2 * minimumSpacing) / 2
-            height = width * 1.2
+
         }
+
+        //TODO: fix these hardcoded values
+        height = width * 3 / 4  //the thumbnails have 4:3 ratio
+        height += 88 + 54       //I know I need at least the image(75) and the label(54)
 
         return CGSize(width: width, height: height)
     }
