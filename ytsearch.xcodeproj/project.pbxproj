@@ -1,0 +1,746 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		82151828213737F800C00298 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82151827213737F800C00298 /* AppDelegate.swift */; };
+		8215182A213737F800C00298 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82151829213737F800C00298 /* VideosViewController.swift */; };
+		8215182D213737F900C00298 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8215182B213737F900C00298 /* Main.storyboard */; };
+		8215182F2137381100C00298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8215182E2137381100C00298 /* Assets.xcassets */; };
+		821518322137381100C00298 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 821518302137381100C00298 /* LaunchScreen.storyboard */; };
+		8215183D2137381100C00298 /* ytsearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215183C2137381100C00298 /* ytsearchTests.swift */; };
+		821518482137381100C00298 /* ytsearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821518472137381100C00298 /* ytsearchUITests.swift */; };
+		8215185F21373F8C00C00298 /* VideoSearcherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215185E21373F8C00C00298 /* VideoSearcherViewModel.swift */; };
+		821518622137400000C00298 /* VideoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821518612137400000C00298 /* VideoService.swift */; };
+		82B44E9B2138F19000CAF0C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82B44E9A2138F19000CAF0C9 /* GoogleService-Info.plist */; };
+		82B44EA321394C9800CAF0C9 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EA221394C9800CAF0C9 /* SignInViewController.swift */; };
+		82B44EA8213A9C8C00CAF0C9 /* YTVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EA7213A9C8C00CAF0C9 /* YTVideo.swift */; };
+		82B44EAB213ACC5700CAF0C9 /* VideoThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EA9213ACC5700CAF0C9 /* VideoThumbnailCell.swift */; };
+		82B44EAC213ACC5700CAF0C9 /* VideoThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82B44EAA213ACC5700CAF0C9 /* VideoThumbnailCell.xib */; };
+		82B44EAF213AE4BC00CAF0C9 /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EAE213AE4BC00CAF0C9 /* LRUCache.swift */; };
+		E89C911547767BE3A90F0578 /* libPods-ytsearch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5700AD8338C6E733BF439F49 /* libPods-ytsearch.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		821518392137381100C00298 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8215181C213737F800C00298 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82151823213737F800C00298;
+			remoteInfo = ytsearch;
+		};
+		821518442137381100C00298 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8215181C213737F800C00298 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82151823213737F800C00298;
+			remoteInfo = ytsearch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5700AD8338C6E733BF439F49 /* libPods-ytsearch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ytsearch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82151824213737F800C00298 /* ytsearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ytsearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		82151827213737F800C00298 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		82151829213737F800C00298 /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
+		8215182C213737F900C00298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8215182E2137381100C00298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		821518312137381100C00298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		821518332137381100C00298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		821518382137381100C00298 /* ytsearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ytsearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8215183C2137381100C00298 /* ytsearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ytsearchTests.swift; sourceTree = "<group>"; };
+		8215183E2137381100C00298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		821518432137381100C00298 /* ytsearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ytsearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		821518472137381100C00298 /* ytsearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ytsearchUITests.swift; sourceTree = "<group>"; };
+		821518492137381100C00298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8215185E21373F8C00C00298 /* VideoSearcherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSearcherViewModel.swift; sourceTree = "<group>"; };
+		821518612137400000C00298 /* VideoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoService.swift; sourceTree = "<group>"; };
+		82B44E9A2138F19000CAF0C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		82B44E9D2139474A00CAF0C9 /* ytsearch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ytsearch-Bridging-Header.h"; sourceTree = "<group>"; };
+		82B44EA221394C9800CAF0C9 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		82B44EA7213A9C8C00CAF0C9 /* YTVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTVideo.swift; sourceTree = "<group>"; };
+		82B44EA9213ACC5700CAF0C9 /* VideoThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbnailCell.swift; sourceTree = "<group>"; };
+		82B44EAA213ACC5700CAF0C9 /* VideoThumbnailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoThumbnailCell.xib; sourceTree = "<group>"; };
+		82B44EAE213AE4BC00CAF0C9 /* LRUCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
+		A5482BA8D84470D12FD8F050 /* Pods-ytsearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytsearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-ytsearch/Pods-ytsearch.release.xcconfig"; sourceTree = "<group>"; };
+		C937773C248FF821C959CFB1 /* Pods-ytsearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytsearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ytsearch/Pods-ytsearch.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82151821213737F800C00298 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E89C911547767BE3A90F0578 /* libPods-ytsearch.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		821518352137381100C00298 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		821518402137381100C00298 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8215181B213737F800C00298 = {
+			isa = PBXGroup;
+			children = (
+				82B44E9A2138F19000CAF0C9 /* GoogleService-Info.plist */,
+				82151826213737F800C00298 /* ytsearch */,
+				8215183B2137381100C00298 /* ytsearchTests */,
+				821518462137381100C00298 /* ytsearchUITests */,
+				82151825213737F800C00298 /* Products */,
+				FA7F6BD9468DB21CCFA26042 /* Pods */,
+				9C619A211DE17ED759A767CA /* Frameworks */,
+				82B44E9D2139474A00CAF0C9 /* ytsearch-Bridging-Header.h */,
+			);
+			sourceTree = "<group>";
+		};
+		82151825213737F800C00298 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82151824213737F800C00298 /* ytsearch.app */,
+				821518382137381100C00298 /* ytsearchTests.xctest */,
+				821518432137381100C00298 /* ytsearchUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		82151826213737F800C00298 /* ytsearch */ = {
+			isa = PBXGroup;
+			children = (
+				82B44EAD213AE49200CAF0C9 /* utilities */,
+				82B44EA4213A9BF200CAF0C9 /* models */,
+				82B44EA121394C7200CAF0C9 /* controllers */,
+				8215186021373FC400C00298 /* network */,
+				8215185D21373C4F00C00298 /* viewmodels */,
+				8215185521373A3700C00298 /* views */,
+				82151827213737F800C00298 /* AppDelegate.swift */,
+				8215182B213737F900C00298 /* Main.storyboard */,
+				8215182E2137381100C00298 /* Assets.xcassets */,
+				821518302137381100C00298 /* LaunchScreen.storyboard */,
+				821518332137381100C00298 /* Info.plist */,
+			);
+			path = ytsearch;
+			sourceTree = "<group>";
+		};
+		8215183B2137381100C00298 /* ytsearchTests */ = {
+			isa = PBXGroup;
+			children = (
+				8215183C2137381100C00298 /* ytsearchTests.swift */,
+				8215183E2137381100C00298 /* Info.plist */,
+			);
+			path = ytsearchTests;
+			sourceTree = "<group>";
+		};
+		821518462137381100C00298 /* ytsearchUITests */ = {
+			isa = PBXGroup;
+			children = (
+				821518472137381100C00298 /* ytsearchUITests.swift */,
+				821518492137381100C00298 /* Info.plist */,
+			);
+			path = ytsearchUITests;
+			sourceTree = "<group>";
+		};
+		8215185521373A3700C00298 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				82B44EA9213ACC5700CAF0C9 /* VideoThumbnailCell.swift */,
+				82B44EAA213ACC5700CAF0C9 /* VideoThumbnailCell.xib */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		8215185D21373C4F00C00298 /* viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				8215185E21373F8C00C00298 /* VideoSearcherViewModel.swift */,
+			);
+			path = viewmodels;
+			sourceTree = "<group>";
+		};
+		8215186021373FC400C00298 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				821518612137400000C00298 /* VideoService.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		82B44EA121394C7200CAF0C9 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				82151829213737F800C00298 /* VideosViewController.swift */,
+				82B44EA221394C9800CAF0C9 /* SignInViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		82B44EA4213A9BF200CAF0C9 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				82B44EA7213A9C8C00CAF0C9 /* YTVideo.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		82B44EAD213AE49200CAF0C9 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				82B44EAE213AE4BC00CAF0C9 /* LRUCache.swift */,
+			);
+			path = utilities;
+			sourceTree = "<group>";
+		};
+		9C619A211DE17ED759A767CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5700AD8338C6E733BF439F49 /* libPods-ytsearch.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA7F6BD9468DB21CCFA26042 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C937773C248FF821C959CFB1 /* Pods-ytsearch.debug.xcconfig */,
+				A5482BA8D84470D12FD8F050 /* Pods-ytsearch.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82151823213737F800C00298 /* ytsearch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8215184C2137381100C00298 /* Build configuration list for PBXNativeTarget "ytsearch" */;
+			buildPhases = (
+				EF3C8BB066AA80C85E804D8E /* [CP] Check Pods Manifest.lock */,
+				82151820213737F800C00298 /* Sources */,
+				82151821213737F800C00298 /* Frameworks */,
+				82151822213737F800C00298 /* Resources */,
+				83A7AC856DBC7ACE00C629E7 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ytsearch;
+			productName = ytsearch;
+			productReference = 82151824213737F800C00298 /* ytsearch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		821518372137381100C00298 /* ytsearchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8215184F2137381100C00298 /* Build configuration list for PBXNativeTarget "ytsearchTests" */;
+			buildPhases = (
+				821518342137381100C00298 /* Sources */,
+				821518352137381100C00298 /* Frameworks */,
+				821518362137381100C00298 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8215183A2137381100C00298 /* PBXTargetDependency */,
+			);
+			name = ytsearchTests;
+			productName = ytsearchTests;
+			productReference = 821518382137381100C00298 /* ytsearchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		821518422137381100C00298 /* ytsearchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 821518522137381100C00298 /* Build configuration list for PBXNativeTarget "ytsearchUITests" */;
+			buildPhases = (
+				8215183F2137381100C00298 /* Sources */,
+				821518402137381100C00298 /* Frameworks */,
+				821518412137381100C00298 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				821518452137381100C00298 /* PBXTargetDependency */,
+			);
+			name = ytsearchUITests;
+			productName = ytsearchUITests;
+			productReference = 821518432137381100C00298 /* ytsearchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8215181C213737F800C00298 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Jose A. Mena";
+				TargetAttributes = {
+					82151823213737F800C00298 = {
+						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
+					};
+					821518372137381100C00298 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 82151823213737F800C00298;
+					};
+					821518422137381100C00298 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 82151823213737F800C00298;
+					};
+				};
+			};
+			buildConfigurationList = 8215181F213737F800C00298 /* Build configuration list for PBXProject "ytsearch" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8215181B213737F800C00298;
+			productRefGroup = 82151825213737F800C00298 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82151823213737F800C00298 /* ytsearch */,
+				821518372137381100C00298 /* ytsearchTests */,
+				821518422137381100C00298 /* ytsearchUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		82151822213737F800C00298 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				821518322137381100C00298 /* LaunchScreen.storyboard in Resources */,
+				82B44E9B2138F19000CAF0C9 /* GoogleService-Info.plist in Resources */,
+				8215182F2137381100C00298 /* Assets.xcassets in Resources */,
+				8215182D213737F900C00298 /* Main.storyboard in Resources */,
+				82B44EAC213ACC5700CAF0C9 /* VideoThumbnailCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		821518362137381100C00298 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		821518412137381100C00298 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		83A7AC856DBC7ACE00C629E7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ytsearch/Pods-ytsearch-resources.sh",
+				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ytsearch/Pods-ytsearch-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF3C8BB066AA80C85E804D8E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ytsearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		82151820213737F800C00298 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82B44EAF213AE4BC00CAF0C9 /* LRUCache.swift in Sources */,
+				8215185F21373F8C00C00298 /* VideoSearcherViewModel.swift in Sources */,
+				821518622137400000C00298 /* VideoService.swift in Sources */,
+				82B44EA321394C9800CAF0C9 /* SignInViewController.swift in Sources */,
+				8215182A213737F800C00298 /* VideosViewController.swift in Sources */,
+				82B44EA8213A9C8C00CAF0C9 /* YTVideo.swift in Sources */,
+				82151828213737F800C00298 /* AppDelegate.swift in Sources */,
+				82B44EAB213ACC5700CAF0C9 /* VideoThumbnailCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		821518342137381100C00298 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8215183D2137381100C00298 /* ytsearchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8215183F2137381100C00298 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				821518482137381100C00298 /* ytsearchUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8215183A2137381100C00298 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82151823213737F800C00298 /* ytsearch */;
+			targetProxy = 821518392137381100C00298 /* PBXContainerItemProxy */;
+		};
+		821518452137381100C00298 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82151823213737F800C00298 /* ytsearch */;
+			targetProxy = 821518442137381100C00298 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8215182B213737F900C00298 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8215182C213737F900C00298 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		821518302137381100C00298 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				821518312137381100C00298 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8215184A2137381100C00298 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8215184B2137381100C00298 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8215184D2137381100C00298 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C937773C248FF821C959CFB1 /* Pods-ytsearch.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A499PXUJ8D;
+				INFOPLIST_FILE = ytsearch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jose.mena.ytsearch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ytsearch-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8215184E2137381100C00298 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5482BA8D84470D12FD8F050 /* Pods-ytsearch.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A499PXUJ8D;
+				INFOPLIST_FILE = ytsearch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jose.mena.ytsearch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ytsearch-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		821518502137381100C00298 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A499PXUJ8D;
+				INFOPLIST_FILE = ytsearchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jose.mena.ytsearchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ytsearch.app/ytsearch";
+			};
+			name = Debug;
+		};
+		821518512137381100C00298 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A499PXUJ8D;
+				INFOPLIST_FILE = ytsearchTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jose.mena.ytsearchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ytsearch.app/ytsearch";
+			};
+			name = Release;
+		};
+		821518532137381100C00298 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A499PXUJ8D;
+				INFOPLIST_FILE = ytsearchUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jose.mena.ytsearchUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ytsearch;
+			};
+			name = Debug;
+		};
+		821518542137381100C00298 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A499PXUJ8D;
+				INFOPLIST_FILE = ytsearchUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jose.mena.ytsearchUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ytsearch;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8215181F213737F800C00298 /* Build configuration list for PBXProject "ytsearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8215184A2137381100C00298 /* Debug */,
+				8215184B2137381100C00298 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8215184C2137381100C00298 /* Build configuration list for PBXNativeTarget "ytsearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8215184D2137381100C00298 /* Debug */,
+				8215184E2137381100C00298 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8215184F2137381100C00298 /* Build configuration list for PBXNativeTarget "ytsearchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				821518502137381100C00298 /* Debug */,
+				821518512137381100C00298 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		821518522137381100C00298 /* Build configuration list for PBXNativeTarget "ytsearchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				821518532137381100C00298 /* Debug */,
+				821518542137381100C00298 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8215181C213737F800C00298 /* Project object */;
+}
