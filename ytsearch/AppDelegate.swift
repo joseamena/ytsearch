@@ -25,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-
-//        let _ = NetworkClient.shared
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

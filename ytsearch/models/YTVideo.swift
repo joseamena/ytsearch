@@ -9,11 +9,23 @@
 import Foundation
 
 struct YTVideo {
+    let videoId: String?
     let description: String?
     let channelTitle: String?
     let channelId: String?
     let title: String?
     let thumbnails: GTLRYouTube_ThumbnailDetails?
+    let date: Date?
+
+    init(with searchResult: GTLRYouTube_SearchResult) {
+        description = searchResult.snippet?.descriptionProperty
+        channelTitle = searchResult.snippet?.channelTitle
+        channelId = searchResult.snippet?.channelId
+        title = searchResult.snippet?.title
+        thumbnails = searchResult.snippet?.thumbnails
+        date = searchResult.snippet?.publishedAt?.date
+        videoId = searchResult.identifier?.videoId
+    }
 
     var thumbnailWidth: CGFloat {
         get {
@@ -27,12 +39,5 @@ struct YTVideo {
             guard let height = thumbnails?.high?.height?.floatValue else { return 0 }
             return CGFloat(height)
         }
-    }
-    init(with snippet: GTLRYouTube_SearchResultSnippet) {
-        description = snippet.descriptionProperty
-        channelTitle = snippet.channelTitle
-        channelId = snippet.channelId
-        title = snippet.title
-        thumbnails = snippet.thumbnails
     }
 }

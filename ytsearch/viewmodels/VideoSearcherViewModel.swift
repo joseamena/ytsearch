@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol VideoListViewModelDelegate {
+    func playVideo(with id: String)
+}
+
 class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
-    
+
+    var delegate: VideoListViewModelDelegate?
     var videos : [YTVideo] = []
     private let serialQueue = DispatchQueue(label: "com.joseamena.serial")
     private var cache = LRUCache<URL,UIImage>(size: 10)
@@ -63,29 +68,11 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
             guard let searchResults = res as? [GTLRYouTube_SearchResult] else { return }
 
             for result in searchResults {
-                if let snippet = result.snippet {
-                    let video = YTVideo(with: snippet)
-                    self.videos.append(video)
-                }
+                let video = YTVideo(with: result)
+                self.videos.append(video)
             }
             completion()
         })
-    }
-
-    public func image(forItemAt indexPath: IndexPath) -> UIImage? {
-//        if let image = cache.getValue(key: indexPath) {
-//            return image
-//        }
-
-//        if let gifUrlString = gifInfos?[indexPath.row].url {
-//            let image = UIImage.gif(url: gifUrlString)
-//            if let image = image {
-//                cache.set(value: image, forKey: indexPath)
-//            }
-//            return image
-//        }
-
-        return nil
     }
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
@@ -117,7 +104,7 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         cell.videoDescription.text = video.description
         cell.title.text = video.title
         cell.channel.text = video.channelTitle
-
+        print("channel id: \(video.channelId ?? "none")")
         print("width: \(video.thumbnailWidth) height: \(video.thumbnailHeight)")
         serialQueue.async {
             guard let urlString = video.thumbnails?.high?.url else { return }
@@ -148,44 +135,31 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
     
 }
 
-//extension GIFSearcherViewModel: MosaicLayoutDelegate {
-//    func collectionView(_ collectionView: UICollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        guard let width = gifInfos?[indexPath.row].width,
-//            let height = gifInfos?[indexPath.row].height else {
-//                return CGSize(width: 0, height: 0)
-//        }
-//
-//        return CGSize(width: width, height: height)
-//    }
-//}
+extension VideoSearcherViewModel: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected item \(indexPath.row)\n")
+        guard let videoId = videos[indexPath.row].videoId else { return }
+        delegate?.playVideo(with: videoId)
+    }
+}
 
-//extension GIFSearcherViewModel: UICollectionViewDelegateFlowLayout {
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let maxWidth = (collectionView.frame.width / columns) - (inset + spacing)
-//
-//        guard let width = gifInfos?[indexPath.row].width,
-//            let height = gifInfos?[indexPath.row].height else {
-//            return CGSize(width: maxWidth, height: maxWidth)
-//        }
-//
-//        let scale = maxWidth / width
-//        let scaledheight = scale * height
-//
-//        return CGSize(width: maxWidth, height: scaledheight)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsetsMake(inset, inset, inset, inset)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return spacing
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return spacing
-//    }
-//}
+extension VideoSearcherViewModel: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        var width: CGFloat
+        var height: CGFloat
+
+        let minimumSpacing:CGFloat = 10.0
+        if UIDevice.current.orientation == UIDeviceOrientation.portrait ||
+            UIDevice.current.orientation == UIDeviceOrientation.portraitUpsideDown{
+            width = collectionView.frame.size.width - 2 * minimumSpacing
+            height = width * 4 / 3
+        } else {
+            width = (collectionView.frame.size.width - 2 * minimumSpacing) / 2
+            height = width * 1.2
+        }
+
+        return CGSize(width: width, height: height)
+    }
+}
+
