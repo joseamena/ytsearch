@@ -52,7 +52,7 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
                 queryString += stringArray[i]
             }
         }
-        
+        videos.removeAll()
         VideoService.shared.fetchSearch(queryString: queryString, completionHandler: { (res, error) -> Void in
             if let error = error {
                 print(error)
@@ -77,14 +77,14 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            serialQueue.async {
-                let video = self.videos[indexPath.row]
-                guard let videoURLString = video.thumbnails?.defaultProperty?.url else { return }
-                let videoURL = URL(fileURLWithPath: videoURLString)
-                _ = self.cache.getValue(key: videoURL, completion: { (data, error) -> Void in
-                    
-                })
-            }
+//            serialQueue.async {
+//                let video = self.videos[indexPath.row]
+//                guard let videoURLString = video.thumbnails?.defaultProperty?.url else { return }
+//                let videoURL = URL(fileURLWithPath: videoURLString)
+//                _ = self.cache.getValue(key: videoURL, completion: { (data, error) -> Void in
+//                    
+//                })
+//            }
         }
     }
     
@@ -100,6 +100,9 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoThumbnailCell",
                                                       for: indexPath) as! VideoThumbnailCell
 
+        if indexPath.row >= videos.count {
+            return cell
+        }
         let video = videos[indexPath.row]
         cell.videoDescription.text = video.description
         cell.title.text = video.title
@@ -138,7 +141,10 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 extension VideoSearcherViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected item \(indexPath.row)\n")
-        guard let videoId = videos[indexPath.row].videoId else { return }
+        guard let videoId = videos[indexPath.row].videoId else {
+            print("no videoID")
+            return
+        }
         delegate?.playVideo(with: videoId)
     }
 }
