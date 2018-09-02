@@ -20,30 +20,27 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hy3-Wg-9Dk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AHD-Cb-2w7">
                                     <size key="itemSize" width="335" height="338"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="rXi-5o-Fuc" customClass="VideoThumbnailCell" customModule="ytsearch" customModuleProvider="target">
-                                        <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="customSize" width="200" height="200"/>
-                                    </collectionViewCell>
-                                </cells>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="kUG-Gu-DXs">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                                <cells/>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xDM-ft-B2L">
+                                <rect key="frame" x="169" y="347" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xDM-ft-B2L" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="7sg-JV-BBx"/>
                             <constraint firstItem="Hy3-Wg-9Dk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9ua-vg-bgS"/>
+                            <constraint firstItem="xDM-ft-B2L" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="L0g-2v-Tdu"/>
                             <constraint firstItem="Hy3-Wg-9Dk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YLH-hD-odb"/>
                             <constraint firstItem="Hy3-Wg-9Dk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xkI-GM-zJ9"/>
                             <constraint firstItem="Hy3-Wg-9Dk" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="y4t-pZ-Uc5"/>
@@ -58,6 +55,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="xDM-ft-B2L" id="5Jh-8p-md7"/>
                         <outlet property="logOutButton" destination="DPV-WB-Wuc" id="oRU-50-li7"/>
                         <outlet property="videosCollectionView" destination="Hy3-Wg-9Dk" id="HEI-n5-0TX"/>
                     </connections>

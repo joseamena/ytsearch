@@ -5,3 +5,4 @@
 #include "GTLRYouTubeQuery.h"
 #include "GTLRYouTubeService.h"
 #include "GTLRYouTubeObjects.h"
+#include "YTPlayerView.h"

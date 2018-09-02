@@ -39,10 +39,12 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - GTMSessionFetcher/Full (1.2.0):
     - GTMSessionFetcher/Core (= 1.2.0)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - Google/SignIn (~> 3.0.3)
   - GoogleAPIClientForREST/YouTube (~> 1.2.1)
+  - youtube-ios-player-helper (~> 0.1.6)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -55,6 +57,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMOAuth2
     - GTMSessionFetcher
+    - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
@@ -66,7 +69,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 649c1dc64a677f23bfc835d188af7424ab57b95d
+PODFILE CHECKSUM: 462eee1fbadc2379489d40290709eb41ef22812a
 
 COCOAPODS: 1.5.3
