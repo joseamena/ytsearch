@@ -26,15 +26,18 @@ class VideosViewController: UIViewController {
         navigationItem.searchController = searchcontroller
         navigationItem.hidesSearchBarWhenScrolling = false
         searchcontroller.isActive = true
+        searchcontroller.searchBar.delegate = self
+//        searchcontroller.searchResultsUpdater = self
+        searchcontroller.obscuresBackgroundDuringPresentation = true
+        searchcontroller.searchBar.placeholder = "Search Videos"
+
+        definesPresentationContext = true
         title = "Videos"
 
         videosCollectionView.dataSource = viewModel
         videosCollectionView.delegate = viewModel
         viewModel.delegate = self
 
-        viewModel.fetch(searchString: "guitar") {
-            self.videosCollectionView.reloadData()
-        }
 
         videosCollectionView.register(UINib(nibName: "VideoThumbnailCell", bundle: nil),
                                       forCellWithReuseIdentifier: "VideoThumbnailCell")
@@ -42,7 +45,6 @@ class VideosViewController: UIViewController {
 
         //add the video player subview and make it hidden
         playerView.delegate = self
-//        playerView.isHidden = true
         playerView.backgroundColor = UIColor.brown
         view.addSubview(playerView)
     }
@@ -101,8 +103,11 @@ extension VideosViewController: VideoListViewModelDelegate {
         playerView.load(withVideoId: id)
 
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            if self.playerView.playerState() == YTPlayerState.playing {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            if self.playerView.playerState() == YTPlayerState.playing ||
+                self.playerView.playerState() == .unstarted ||
+                self.playerView.playerState() == .buffering ||
+                self.playerView.playerState() == .paused {
                 return
             }
             self.playerView.stopVideo()
@@ -113,6 +118,18 @@ extension VideosViewController: VideoListViewModelDelegate {
     }
 }
 
+
+extension VideosViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let searchText = searchBar.text else { return }
+
+        print(searchText)
+        viewModel.fetch(searchString: searchText) {
+            self.videosCollectionView.reloadData()
+        }
+    }
+}
 //misc helper funtions
 extension VideosViewController {
     func showAlert(message: String) {
@@ -125,3 +142,4 @@ extension VideosViewController {
         self.present(alert, animated: true)
     }
 }
+
