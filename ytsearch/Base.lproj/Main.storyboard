@@ -48,10 +48,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="ExO-V8-O3C">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="DPV-WB-Wuc">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="DPV-WB-Wuc">
                             <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logOut:" destination="BYZ-38-t0r" id="g2m-HC-OB2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search Type" id="EqR-nG-VCW">
+                            <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="selectSearchType:" destination="BYZ-38-t0r" id="Mvm-Hx-DdB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

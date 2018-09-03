@@ -17,8 +17,22 @@ class VideosViewController: UIViewController {
 
     private let viewModel = VideoSearcherViewModel()
     private var searchcontroller = UISearchController(searchResultsController: nil)
-
+    private let pickerView = UIPickerView()
     private let playerView = YTPlayerView()
+    private let searchTypes = ["Any", "Movie", "Episode"]
+    private var selectedSearchType: String? {
+        didSet {
+            if selectedSearchType != oldValue {
+                //perform fetch again
+                guard let searchText = searchcontroller.searchBar.text else { return }
+                viewModel.fetch(searchString: searchText, searchType: selectedSearchType?.lowercased()) {
+                    self.videosCollectionView.reloadData()
+                }
+            }
+        }
+    }
+
+    var pickerViewHeightConstraint : NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +45,7 @@ class VideosViewController: UIViewController {
         searchcontroller.searchBar.placeholder = "Search Videos"
 
         definesPresentationContext = true
-        title = "Videos"
+        title = "YT SEARCH"
 
         videosCollectionView.dataSource = viewModel
         videosCollectionView.delegate = viewModel
@@ -42,10 +56,31 @@ class VideosViewController: UIViewController {
                                       forCellWithReuseIdentifier: "VideoThumbnailCell")
 
 
-        //add the video player subview and make it hidden
+
+        //add the video player
         playerView.delegate = self
         playerView.backgroundColor = UIColor.brown
         view.addSubview(playerView)
+
+        //add picker view
+        pickerView.backgroundColor = UIColor.lightGray
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(pickerView)
+        pickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        pickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        pickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+
+        pickerViewHeightConstraint = NSLayoutConstraint(item: pickerView,
+                                                        attribute: .height,
+                                                        relatedBy: .equal,
+                                                        toItem: nil,
+                                                        attribute: .notAnAttribute,
+                                                        multiplier: 1,
+                                                        constant: 0)
+
+        pickerView.addConstraint(pickerViewHeightConstraint!)
     }
 
     @IBAction func logOut(_ sender: Any) {
@@ -53,6 +88,14 @@ class VideosViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         GIDSignIn.sharedInstance().signOut()
     }
+
+    @IBAction func selectSearchType(_ sender: UIBarButtonItem) {
+        UIView.animate(withDuration: 0.5) {
+            self.pickerViewHeightConstraint?.constant = 100
+            self.view.layoutIfNeeded()
+        }
+    }
+
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         videosCollectionView.reloadData()
@@ -120,14 +163,34 @@ extension VideosViewController: VideoListViewModelDelegate {
 
 extension VideosViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        searchBar.resignFirstResponder()
         searchcontroller.dismiss(animated: true, completion: nil)
         guard let searchText = searchBar.text else { return }
 
-        print(searchText)
-        viewModel.fetch(searchString: searchText) {
+        viewModel.fetch(searchString: searchText, searchType: selectedSearchType?.lowercased()) {
             self.videosCollectionView.reloadData()
         }
+    }
+}
+
+extension VideosViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return searchTypes[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedSearchType = searchTypes[row]
+        UIView.animate(withDuration: 0.5) {
+            self.pickerViewHeightConstraint?.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return searchTypes.count
     }
 }
 //misc helper funtions
@@ -142,4 +205,3 @@ extension VideosViewController {
         self.present(alert, animated: true)
     }
 }
-

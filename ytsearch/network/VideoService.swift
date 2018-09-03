@@ -50,10 +50,12 @@ class VideoService: NSObject {
         fetch(endpoint: "trending?", success: success, failure: failure)
     }
     
-    public func fetchSearch(queryString: String, completionHandler: (([Any]?, NSError?) -> Void)?) {
+    public func fetchSearch(queryString: String, searchType: String?, completionHandler: (([Any]?, NSError?) -> Void)?) {
 
         let query = GTLRYouTubeQuery_SearchList.query(withPart: "snippet")
         query.q = queryString
+        query.type = "video"
+        query.videoType = searchType
         query.maxResults = 10
 
         queryCompletionHandler = completionHandler
