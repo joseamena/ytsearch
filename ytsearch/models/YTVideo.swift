@@ -8,25 +8,24 @@
 
 import Foundation
 
-struct YTVideo {
-    let videoId: String?
-    let description: String?
-    let channelTitle: String?
-    let channelId: String?
-    let title: String?
-    let thumbnails: GTLRYouTube_ThumbnailDetails?
-    let date: Date?
+class YTVideo {
+    var id: String?
+    var description: String?
+    var title: String?
+    var channel = YTChannel()
+    var thumbnails: GTLRYouTube_ThumbnailDetails?
+    var date: Date?
+    var duration: String?
 
-    init(with searchResult: GTLRYouTube_SearchResult) {
-        description = searchResult.snippet?.descriptionProperty
-        channelTitle = searchResult.snippet?.channelTitle
-        channelId = searchResult.snippet?.channelId
-        title = searchResult.snippet?.title
-        thumbnails = searchResult.snippet?.thumbnails
-        date = searchResult.snippet?.publishedAt?.date
-        videoId = searchResult.identifier?.videoId
-      
-    }
+//    init(with searchResult: GTLRYouTube_SearchResult) {
+//        description = searchResult.snippet?.descriptionProperty
+//        channelTitle = searchResult.snippet?.channelTitle
+//        channelId = searchResult.snippet?.channelId
+//        title = searchResult.snippet?.title
+//        thumbnails = searchResult.snippet?.thumbnails
+//        date = searchResult.snippet?.publishedAt?.date
+//        videoId = searchResult.identifier?.videoId
+//    }
 
     var thumbnailWidth: CGFloat {
         get {

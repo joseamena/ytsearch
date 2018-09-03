@@ -52,12 +52,10 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
                                                 return
                                             }
 
-                                            guard let searchResults = res as? [GTLRYouTube_SearchResult] else { return }
+                                            print(Thread.current)
+                                            guard let videos = res as? [YTVideo] else { return }
+                                            self.videos = videos
 
-                                            for result in searchResults {
-                                                let video = YTVideo(with: result)
-                                                self.videos.append(video)
-                                            }
                                             completion()
         })
     }
@@ -92,15 +90,17 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         }
         let video = videos[indexPath.row]
         cell.videoDescription.text = video.description
-        cell.title.text = video.title
-        cell.channel.text = video.channelTitle
-
+        let videoDuration = video.duration ?? ""
+        let title = (video.title ?? "") + " (" + videoDuration + ")"
+        cell.title.text = title
+        cell.channel.text = video.channel.title
+        
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd"
 
         if let date = video.date {
             let dateString = formatter.string(from: date)
-            cell.date.text = dateString
+            cell.date.text = "Published on: " + dateString
         }
 
         serialQueue.async {
@@ -135,7 +135,7 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 extension VideoSearcherViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("selected item \(indexPath.row)\n")
-        guard let videoId = videos[indexPath.row].videoId else {
+        guard let videoId = videos[indexPath.row].id else {
             print("no videoID")
             return
         }
