@@ -22,6 +22,7 @@
 		82B44EAB213ACC5700CAF0C9 /* VideoThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EA9213ACC5700CAF0C9 /* VideoThumbnailCell.swift */; };
 		82B44EAC213ACC5700CAF0C9 /* VideoThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82B44EAA213ACC5700CAF0C9 /* VideoThumbnailCell.xib */; };
 		82B44EAF213AE4BC00CAF0C9 /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EAE213AE4BC00CAF0C9 /* LRUCache.swift */; };
+		82B44EB1213D987000CAF0C9 /* YTChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B44EB0213D987000CAF0C9 /* YTChannel.swift */; };
 		E89C911547767BE3A90F0578 /* libPods-ytsearch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5700AD8338C6E733BF439F49 /* libPods-ytsearch.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		82B44EA9213ACC5700CAF0C9 /* VideoThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbnailCell.swift; sourceTree = "<group>"; };
 		82B44EAA213ACC5700CAF0C9 /* VideoThumbnailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoThumbnailCell.xib; sourceTree = "<group>"; };
 		82B44EAE213AE4BC00CAF0C9 /* LRUCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUCache.swift; sourceTree = "<group>"; };
+		82B44EB0213D987000CAF0C9 /* YTChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTChannel.swift; sourceTree = "<group>"; };
 		A5482BA8D84470D12FD8F050 /* Pods-ytsearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytsearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-ytsearch/Pods-ytsearch.release.xcconfig"; sourceTree = "<group>"; };
 		C937773C248FF821C959CFB1 /* Pods-ytsearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytsearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ytsearch/Pods-ytsearch.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				82B44EA7213A9C8C00CAF0C9 /* YTVideo.swift */,
+				82B44EB0213D987000CAF0C9 /* YTChannel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82B44EB1213D987000CAF0C9 /* YTChannel.swift in Sources */,
 				82B44EAF213AE4BC00CAF0C9 /* LRUCache.swift in Sources */,
 				8215185F21373F8C00C00298 /* VideoSearcherViewModel.swift in Sources */,
 				821518622137400000C00298 /* VideoService.swift in Sources */,
