@@ -8,11 +8,19 @@
 
 import Foundation
 
-class YTVideo {
+class YTVideo: Hashable {
+    var hashValue: Int {
+        return id?.hashValue ?? 0
+    }
+
+    static func == (lhs: YTVideo, rhs: YTVideo) -> Bool {
+        return lhs.id == rhs.id
+    }
+
     var id: String?
     var description: String?
     var title: String?
-    var channel = YTChannel()
+    var channel: YTChannel?
     var thumbnails: GTLRYouTube_ThumbnailDetails?
     var date: Date?
     var duration: String?
