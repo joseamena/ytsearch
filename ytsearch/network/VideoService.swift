@@ -68,6 +68,18 @@ class VideoService: NSObject {
         finishedWithObject response : GTLRYouTube_SearchListResponse,
         error : NSError?) {
 
+        //now query the channel
+//        if let items = response.items {
+//            for item in items {
+//                let query = GTLRYouTubeQuery_ChannelsList.query(withPart: "snippet")
+//                query.identifier = item.snippet?.channelId
+//                service.executeQuery(query) { (ticket, obj, error) in
+//                    print(ticket)
+//                    print(obj)
+//                    print(error)
+//                }
+//            }
+//        }
         queryCompletionHandler?(response.items, error)
         queryCompletionHandler = nil
 

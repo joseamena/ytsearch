@@ -13,6 +13,7 @@ class VideoThumbnailCell: UICollectionViewCell {
     @IBOutlet weak var channelImage: UIImageView!
 
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var videoDescription: UILabel!
     
     @IBOutlet weak var thumbnailView: UIImageView!

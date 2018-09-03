@@ -27,7 +27,6 @@ class VideosViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchcontroller.isActive = true
         searchcontroller.searchBar.delegate = self
-//        searchcontroller.searchResultsUpdater = self
         searchcontroller.obscuresBackgroundDuringPresentation = true
         searchcontroller.searchBar.placeholder = "Search Videos"
 
@@ -121,7 +120,8 @@ extension VideosViewController: VideoListViewModelDelegate {
 
 extension VideosViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+//        searchBar.resignFirstResponder()
+        searchcontroller.dismiss(animated: true, completion: nil)
         guard let searchText = searchBar.text else { return }
 
         print(searchText)

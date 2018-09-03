@@ -25,6 +25,7 @@ struct YTVideo {
         thumbnails = searchResult.snippet?.thumbnails
         date = searchResult.snippet?.publishedAt?.date
         videoId = searchResult.identifier?.videoId
+      
     }
 
     var thumbnailWidth: CGFloat {

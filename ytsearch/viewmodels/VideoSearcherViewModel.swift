@@ -58,18 +58,13 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
                 print(error)
                 return
             }
-            print("we are in thread \(Thread.current), and main is \(Thread.main)")
-            if (Thread.isMainThread) {
-                print("we are in the main thread")
-            } else {
-                print("we are not in the main thread")
-            }
 
             guard let searchResults = res as? [GTLRYouTube_SearchResult] else { return }
 
             for result in searchResults {
                 let video = YTVideo(with: result)
                 self.videos.append(video)
+
             }
             completion()
         })
@@ -107,8 +102,15 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         cell.videoDescription.text = video.description
         cell.title.text = video.title
         cell.channel.text = video.channelTitle
-        print("channel id: \(video.channelId ?? "none")")
-        print("width: \(video.thumbnailWidth) height: \(video.thumbnailHeight)")
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        if let date = video.date {
+            let dateString = formatter.string(from: date)
+            cell.date.text = dateString
+        }
+
         serialQueue.async {
             guard let urlString = video.thumbnails?.high?.url else { return }
 
@@ -157,14 +159,15 @@ extension VideoSearcherViewModel: UICollectionViewDelegateFlowLayout {
 
         let minimumSpacing:CGFloat = 10.0
         if UIDevice.current.orientation == UIDeviceOrientation.portrait ||
-            UIDevice.current.orientation == UIDeviceOrientation.portraitUpsideDown{
+            UIDevice.current.orientation == UIDeviceOrientation.portraitUpsideDown {
             width = collectionView.frame.size.width - 2 * minimumSpacing
-            height = width * 4 / 3
         } else {
             width = (collectionView.frame.size.width - 2 * minimumSpacing) / 2
-            height = width * 1.2
         }
 
+        //TODO: fix hardcoded values
+        height = width * 3 / 4  //the video ratio
+        height += 88 + 54   //add
         return CGSize(width: width, height: height)
     }
 }
