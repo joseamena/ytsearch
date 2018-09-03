@@ -15,7 +15,7 @@ class YTVideo {
     var channel = YTChannel()
     var thumbnails: GTLRYouTube_ThumbnailDetails?
     var date: Date?
-    var durationMs: Int = 0
+    var duration: String?
 
 //    init(with searchResult: GTLRYouTube_SearchResult) {
 //        description = searchResult.snippet?.descriptionProperty

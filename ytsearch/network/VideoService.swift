@@ -59,9 +59,6 @@ class VideoService: NSObject {
         query.maxResults = 10
 
         queryCompletionHandler = completionHandler
-//        service.executeQuery(query,
-//                             delegate: self,
-//                             didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:)))
 
         service.executeQuery(query) { [weak self](ticket, obj, error) in
             var videosDictionary = [String : YTVideo] ()
@@ -78,7 +75,7 @@ class VideoService: NSObject {
 
                     var video:YTVideo = YTVideo()
                     video.title = item.snippet?.title
-                    video.description = item.snippet?.description
+                    video.description = item.snippet?.descriptionProperty
                     video.date = item.snippet?.publishedAt?.date
                     video.thumbnails = item.snippet?.thumbnails
                     video.id = item.identifier?.videoId
@@ -121,7 +118,7 @@ class VideoService: NSObject {
             //        }
 
             //query the videos
-            let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "snippet")
+            let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "contentDetails")
             videosQuery.identifier = videosIdentifier
             self?.service.executeQuery(videosQuery) { [weak self] (ticket, obj, error) in
                 if let error = error {
@@ -132,8 +129,21 @@ class VideoService: NSObject {
                     if let items = response.items {
                         for item in items {
                             if let id = item.identifier, let video = videosDictionary[id] {
-                                print(item.fileDetails?.durationMs)
-                                video.durationMs = item.fileDetails?.durationMs?.intValue ?? 0
+//                                print(item.contentDetails)
+//                                let regex = try? NSRegularExpression(pattern: "PT(\\d+)*H*(\\d+)*M*(\\d+)*S*", options: .caseInsensitive)
+//                                let duration  = item.contentDetails?.duration ?? ""
+//                                let matches = regex?.matches(in: duration, options: [], range: NSRange(location: 0, length: duration.count))
+//                                for match in matches! {
+//                                    for n in 0..<match.numberOfRanges {
+//                                        let range = match.range(at: n)
+//                                        let start = duration.index(duration.startIndex, offsetBy: range.location)
+//                                        let end = duration.index(start, offsetBy: range.length)
+//                                        let substring = duration[start..<end]
+//                                        print(substring)
+//                                    }
+//                                }
+                                //TODO parse duration into a nicer format
+                                video.duration = item.contentDetails?.duration ?? ""
                             }
                         }
                     }
@@ -141,91 +151,8 @@ class VideoService: NSObject {
 
                 self?.queryCompletionHandler?(Array(videosDictionary.values), error)
                 self?.queryCompletionHandler = nil
+            }
         }
-    }
-
-
-//    @objc func displayResultWithTicket(
-//        ticket: GTLRServiceTicket,
-//        finishedWithObject response : GTLRYouTube_SearchListResponse,
-//        error : NSError?) {
-//
-//        var videosDictionary = [String : YTVideo] ()
-//        //create YTVideo objects and query the channels and videos
-//        //as we need more data
-//        var channelsIdentifier  = ""
-//        var videosIdentifier = ""
-//        var index = 0
-//        if let items = response.items {
-//            for item in items {
-//
-//                var video:YTVideo = YTVideo()
-//                video.title = item.snippet?.title
-//                video.description = item.snippet?.description
-//                video.date = item.snippet?.publishedAt?.date
-//                video.thumbnails = item.snippet?.thumbnails
-//                video.id = item.identifier?.videoId
-//                video.channel.id = item.snippet?.channelId
-//                video.channel.title = item.snippet?.channelTitle
-//
-//                if let videoId = video.id {
-//                    videosDictionary[videoId] = video
-//                }
-//                if let channelId = item.snippet?.channelId {
-//                    channelsIdentifier += "\(channelId)"
-//                    if index < items.count {
-//                        channelsIdentifier += ","
-//                    }
-//                }
-//                if let videoId = item.identifier?.videoId {
-//                    videosIdentifier += "\(videoId)"
-//                    if index < items.count {
-//                        videosIdentifier += ","
-//                    }
-//                }
-//                index += 1
-//            }
-//        }
-//
-//        //nest the queries so that we call the completion handler when all is done
-//        //query the channels
-////        let channelsQuery = GTLRYouTubeQuery_ChannelsList.query(withPart: "snippet")
-////        channelsQuery.identifier = channelsIdentifier
-////        service.executeQuery(channelsQuery) { (ticket, obj, error) in
-////            if let error = error {
-////                print("could not fetch channels \(error)")
-////                return
-////            }
-////            if let response = obj as? GTLRYouTube_ChannelListResponse {
-////                for item in response.items! {
-////                    print(item)
-////                }
-////            }
-////        }
-//
-//        //query the videos
-//        let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "snippet")
-//        videosQuery.identifier = videosIdentifier
-//        service.executeQuery(videosQuery) { [weak self] (ticket, obj, error) in
-//            if let error = error {
-//                print("could not fetch videos \(error)")
-//                return
-//            }
-//            if let response = obj as? GTLRYouTube_VideoListResponse {
-//                if let items = response.items {
-//                    for item in items {
-//                        if let id = item.identifier, var video = videosDictionary[id] {
-//                            video.durationMs = item.fileDetails?.durationMs?.intValue ?? 0
-//                        }
-//                    }
-//                }
-//            }
-//            self?.queryCompletionHandler?(response.items, error)
-//            self?.queryCompletionHandler = nil
-//        }
-
-
-
     }
 
     func isLoggedIn() -> Bool {
