@@ -40,33 +40,25 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
     }
 
 
-    public func fetch(searchString: String, completion: @escaping () -> Void) {
+    public func fetch(searchString: String, searchType: String?, completion: @escaping () -> Void) {
 
-        let stringArray = searchString.lowercased().components(separatedBy: " ")
-        var queryString = ""
-        
-        for i in 0..<stringArray.count {
-            if i != stringArray.count - 1 {
-                queryString += stringArray[i] + "+"
-            } else {
-                queryString += stringArray[i]
-            }
-        }
         videos.removeAll()
-        VideoService.shared.fetchSearch(queryString: queryString, completionHandler: { (res, error) -> Void in
-            if let error = error {
-                print(error)
-                return
-            }
+        VideoService.shared.fetchSearch(queryString: searchString,
+                                        searchType: searchType,
+                                        completionHandler: { (res, error) -> Void in
+                                            
+                                            if let error = error {
+                                                print(error)
+                                                return
+                                            }
 
-            guard let searchResults = res as? [GTLRYouTube_SearchResult] else { return }
+                                            guard let searchResults = res as? [GTLRYouTube_SearchResult] else { return }
 
-            for result in searchResults {
-                let video = YTVideo(with: result)
-                self.videos.append(video)
-
-            }
-            completion()
+                                            for result in searchResults {
+                                                let video = YTVideo(with: result)
+                                                self.videos.append(video)
+                                            }
+                                            completion()
         })
     }
 
