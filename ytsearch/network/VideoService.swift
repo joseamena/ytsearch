@@ -61,7 +61,7 @@ class VideoService: NSObject {
         queryCompletionHandler = completionHandler
 
         service.executeQuery(query) { [weak self](ticket, obj, error) in
-            var videosDictionary = [String : YTVideo] ()
+            var channelsDictionary = [String : YTChannel] ()
             //create YTVideo objects and query the channels and videos
             //as we need more data
             var channelsIdentifier  = ""
@@ -73,18 +73,21 @@ class VideoService: NSObject {
             if let items = response.items {
                 for item in items {
 
-                    var video:YTVideo = YTVideo()
+                    let video:YTVideo = YTVideo()
                     video.title = item.snippet?.title
                     video.description = item.snippet?.descriptionProperty
                     video.date = item.snippet?.publishedAt?.date
                     video.thumbnails = item.snippet?.thumbnails
                     video.id = item.identifier?.videoId
-                    video.channel.id = item.snippet?.channelId
-                    video.channel.title = item.snippet?.channelTitle
 
-                    if let videoId = video.id {
-                        videosDictionary[videoId] = video
+                    if let channelId = item.snippet?.channelId {
+                        let channel = YTChannel()
+                        channel.id = item.snippet?.channelId
+                        channel.title = item.snippet?.channelTitle
+                        channel.addVideo(video: video)
+                        channelsDictionary[channelId] = channel
                     }
+
                     if let channelId = item.snippet?.channelId {
                         channelsIdentifier += "\(channelId)"
                         if index < items.count {
@@ -102,33 +105,20 @@ class VideoService: NSObject {
             }
 
             //nest the queries so that we call the completion handler when all is done
-            //query the channels
-            //        let channelsQuery = GTLRYouTubeQuery_ChannelsList.query(withPart: "snippet")
-            //        channelsQuery.identifier = channelsIdentifier
-            //        service.executeQuery(channelsQuery) { (ticket, obj, error) in
-            //            if let error = error {
-            //                print("could not fetch channels \(error)")
-            //                return
-            //            }
-            //            if let response = obj as? GTLRYouTube_ChannelListResponse {
-            //                for item in response.items! {
-            //                    print(item)
-            //                }
-            //            }
-            //        }
-
             //query the videos
-            let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "contentDetails")
+            let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "snippet,contentDetails")
             videosQuery.identifier = videosIdentifier
             self?.service.executeQuery(videosQuery) { [weak self] (ticket, obj, error) in
                 if let error = error {
                     print("could not fetch videos \(error)")
                     return
                 }
+                var videos = [YTVideo]()
                 if let response = obj as? GTLRYouTube_VideoListResponse {
                     if let items = response.items {
                         for item in items {
-                            if let id = item.identifier, let video = videosDictionary[id] {
+                            if let channelId = item.snippet?.channelId,
+                                let channel = channelsDictionary[channelId], let videoId = item.identifier  {
 //                                print(item.contentDetails)
 //                                let regex = try? NSRegularExpression(pattern: "PT(\\d+)*H*(\\d+)*M*(\\d+)*S*", options: .caseInsensitive)
 //                                let duration  = item.contentDetails?.duration ?? ""
@@ -143,14 +133,33 @@ class VideoService: NSObject {
 //                                    }
 //                                }
                                 //TODO parse duration into a nicer format
+                                guard let video = channel.getVideo(with: videoId) else { continue }
                                 video.duration = item.contentDetails?.duration ?? ""
+                                videos.append(video)
                             }
                         }
                     }
                 }
-
-                self?.queryCompletionHandler?(Array(videosDictionary.values), error)
-                self?.queryCompletionHandler = nil
+                //query the channels
+                let channelsQuery = GTLRYouTubeQuery_ChannelsList.query(withPart: "snippet")
+                channelsQuery.identifier = channelsIdentifier
+                self?.service.executeQuery(channelsQuery) { [weak self] (ticket, obj, error) in
+                    if let error = error {
+                        print("could not fetch channels \(error)")
+                        return
+                    }
+                    if let response = obj as? GTLRYouTube_ChannelListResponse {
+                        if let items = response.items {
+                            for item in items {
+                                if let channelId = item.identifier, let channel = channelsDictionary[channelId] {
+                                    channel.thumbnails = item.snippet?.thumbnails
+                                }
+                            }
+                        }
+                    }
+                    self?.queryCompletionHandler?(videos, error)
+                    self?.queryCompletionHandler = nil
+                }
             }
         }
     }

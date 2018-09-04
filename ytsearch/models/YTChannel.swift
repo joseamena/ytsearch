@@ -8,10 +8,25 @@
 
 import Foundation
 
-struct YTChannel {
+class YTChannel {
     var id: String?
     var description: String?
     var thumbnails: GTLRYouTube_ThumbnailDetails?
     var title: String?
-    var videos: [YTVideo]?
+    private var videos = [String : YTVideo]()
+
+    func addVideo(video: YTVideo) {
+        if let id = video.id {
+            videos[id] = video
+            video.channel = self
+        }
+    }
+
+    func getVideo(with id: String) -> YTVideo? {
+        return videos[id]
+    }
+
+    func getAllVideos() -> [YTVideo] {
+        return Array(videos.values)
+    }
 }

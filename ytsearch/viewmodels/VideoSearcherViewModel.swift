@@ -93,7 +93,7 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         let videoDuration = video.duration ?? ""
         let title = (video.title ?? "") + " (" + videoDuration + ")"
         cell.title.text = title
-        cell.channel.text = video.channel.title
+        cell.channel.text = video.channel?.title
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -103,9 +103,9 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
             cell.date.text = "Published on: " + dateString
         }
 
+        //load video thumbnail
         serialQueue.async {
             guard let urlString = video.thumbnails?.high?.url else { return }
-
             guard let url = URL(string: urlString) else { return }
 
             DispatchQueue.main.async {
@@ -124,6 +124,30 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 
                 if let image = image {
                     cell.thumbnailView.image = image
+                }
+            }
+        }
+
+        //load channel thumbnail
+        serialQueue.async {
+            guard let urlString = video.channel?.thumbnails?.high?.url else { return }
+            guard let url = URL(string: urlString) else { return }
+
+            DispatchQueue.main.async {
+                let image = self.cache.getValue(key: url, completion: {(data, error) in
+                    //called if the image was nil
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    if let data = data, let img = UIImage(data: data) {
+                        cell.channelImage.image = img
+                        self.cache.set(value: img, forKey: url) //set it on the LRUCache
+                    }
+                })
+
+                if let image = image {
+                    cell.channelImage.image = image
                 }
             }
         }
