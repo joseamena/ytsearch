@@ -14,8 +14,8 @@ pod install
 
 ### Prerequisites
 
--Xcode 9 or higher
--iOS 11 or higher
+-Xcode 9 or higher  
+-iOS 11 or higher  
 -Cocoapods
 
 
@@ -40,4 +40,4 @@ Change the query type in the top right corner to: episode, movie or any, look th
 
 Use button in top left to logout and try to login again.
 
-Additional tests that need to be performed is test the app with a bad internet connection or disconnected
+Additional tests that need to be performed: test the app with a bad internet connection or disconnected.
