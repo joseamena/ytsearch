@@ -94,6 +94,12 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         let title = (video.title ?? "") + " (" + videoDuration + ")"
         cell.title.text = title
         cell.channel.text = video.channel?.title
+
+        cell.channelImage.layer.borderWidth = 1
+        cell.channelImage.layer.masksToBounds = false
+        cell.channelImage.layer.borderColor = UIColor.lightGray.cgColor
+        cell.channelImage.layer.cornerRadius = cell.channelImage.frame.height/2
+        cell.channelImage.clipsToBounds = true
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -158,7 +164,9 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 
 extension VideoSearcherViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected item \(indexPath.row)\n")
+        if indexPath.row >= videos.count {
+            return
+        }
         guard let videoId = videos[indexPath.row].id else {
             print("no videoID")
             return
