@@ -149,8 +149,10 @@ extension VideosViewController: VideoListViewModelDelegate {
             self.videosCollectionView.alpha = 0.5
         }
         activityIndicatorView.startAnimating()
-        playerView.load(withVideoId: id)
-
+        if (!playerView.load(withVideoId: id)) {
+            self.showAlert(message: "Error loading video")
+            return
+        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             if self.playerView.playerState() == YTPlayerState.playing ||
