@@ -4,12 +4,12 @@ One Paragraph of project description goes here
 
 ## Getting Started
 
-1. Get the source code
+1. Get the source code  
 git clone https://github.com/joseamena/ytsearch.git
 
 2. cd into ytsearch repo
 
-3. Install dependencies using cocoapods
+3. Install dependencies using cocoapods  
 pod install
 
 ### Prerequisites
