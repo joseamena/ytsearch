@@ -39,3 +39,5 @@ Do multiple search queries, check for issues in the video thumbnails.
 Change the query type in the top right corner to: episode, movie or any, look that search results are different in each case.
 
 Use button in top left to logout and try to login again.
+
+Additional tests that need to be performed is test the app with a bad internet connection or disconnected
