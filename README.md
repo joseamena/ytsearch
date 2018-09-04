@@ -1,6 +1,6 @@
 # YTSearch
 
-One Paragraph of project description goes here
+This project is a video search app
 
 ## Getting Started
 
@@ -26,17 +26,16 @@ Open ytsearch.xcworkspace with Xcode, build and run on simulator or device
 
 ### Testing and using the app
 
-The first time using the app you must login using a google account
+The first time using the app, you must login using a google account.
 
-After login the search screen is displayed, enter a search term in the search bar and hit search.
+After login, the search screen is displayed, enter a search term in the search bar and hit search.
 
 A maximum of 10 videos will show up.
 
-Change the phone rotation to make sure the app maintains a good layout, when in landscape it should show 2 videos per row
+Change the phone rotation to make sure the app maintains a good layout, when in landscape it should show 2 videos per row.
 
 Do multiple search queries, check for issues in the video thumbnails.
 
-Change the query type in the top right corner to episode, movie or any, look that search results are different in each case
+Change the query type in the top right corner to: episode, movie or any, look that search results are different in each case.
 
-Use button in top left to logout and try login again.
-
+Use button in top left to logout and try to login again.
