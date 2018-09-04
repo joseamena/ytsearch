@@ -126,9 +126,14 @@ class VideoService: NSObject {
                                 let components = temp.components(separatedBy: CharacterSet(charactersIn: "HSM"))
                                 var duration = ""
                                 if components.count == 4 {
-                                    duration = "\(components[0]):\(components[1]):\(components[2])"
+                                    let hours = components[0]
+                                    let minutes = components[1].count == 1 ? "0\(components[1])" : components[1]
+                                    let seconds = components[2].count == 1 ? "0\(components[2])" : components[2]
+                                    duration = "\(hours):\(minutes):\(seconds)"
                                 } else if components.count == 3 {
-                                    duration = "\(components[0]):\(components[1])"
+                                    let minutes = components[0]
+                                    let seconds = components[1].count == 1 ? "0\(components[1])" : components[1]
+                                    duration = "\(minutes):\(seconds)"
                                 } else if components.count == 2 {
                                     duration = components[0]
                                 }
