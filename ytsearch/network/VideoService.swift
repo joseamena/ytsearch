@@ -120,21 +120,22 @@ class VideoService: NSObject {
                             if let channelId = item.snippet?.channelId,
                                 let channel = channelsDictionary[channelId], let videoId = item.identifier  {
 //                                print(item.contentDetails)
-//                                let regex = try? NSRegularExpression(pattern: "PT(\\d+)*H*(\\d+)*M*(\\d+)*S*", options: .caseInsensitive)
-//                                let duration  = item.contentDetails?.duration ?? ""
-//                                let matches = regex?.matches(in: duration, options: [], range: NSRange(location: 0, length: duration.count))
-//                                for match in matches! {
-//                                    for n in 0..<match.numberOfRanges {
-//                                        let range = match.range(at: n)
-//                                        let start = duration.index(duration.startIndex, offsetBy: range.location)
-//                                        let end = duration.index(start, offsetBy: range.length)
-//                                        let substring = duration[start..<end]
-//                                        print(substring)
-//                                    }
-//                                }
+                                let durationISO = item.contentDetails?.duration ?? ""
+                                let index = durationISO.index(durationISO.startIndex, offsetBy: 2)
+                                let temp = String(durationISO[index...])
+                                let components = temp.components(separatedBy: CharacterSet(charactersIn: "HSM"))
+                                var duration = ""
+                                if components.count == 4 {
+                                    duration = "\(components[0]):\(components[1]):\(components[2])"
+                                } else if components.count == 3 {
+                                    duration = "\(components[0]):\(components[1])"
+                                } else if components.count == 2{
+                                    duration = components[0]
+                                }
+
                                 //TODO parse duration into a nicer format
                                 guard let video = channel.getVideo(with: videoId) else { continue }
-                                video.duration = item.contentDetails?.duration ?? ""
+                                video.duration = duration
                                 videos.append(video)
                             }
                         }
