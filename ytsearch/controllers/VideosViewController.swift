@@ -152,10 +152,8 @@ extension VideosViewController: VideoListViewModelDelegate {
         playerView.load(withVideoId: id)
 
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             if self.playerView.playerState() == YTPlayerState.playing ||
-                self.playerView.playerState() == .unstarted ||
-                self.playerView.playerState() == .buffering ||
                 self.playerView.playerState() == .paused {
                 return
             }
