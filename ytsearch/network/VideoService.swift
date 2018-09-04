@@ -129,7 +129,7 @@ class VideoService: NSObject {
                                     duration = "\(components[0]):\(components[1]):\(components[2])"
                                 } else if components.count == 3 {
                                     duration = "\(components[0]):\(components[1])"
-                                } else if components.count == 2{
+                                } else if components.count == 2 {
                                     duration = components[0]
                                 }
 

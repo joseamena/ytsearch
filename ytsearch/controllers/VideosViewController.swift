@@ -83,6 +83,13 @@ class VideosViewController: UIViewController {
         pickerView.addConstraint(pickerViewHeightConstraint!)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.fetch(searchString: "", searchType: selectedSearchType?.lowercased()) {
+            self.videosCollectionView.reloadData()
+        }
+    }
+
     @IBAction func logOut(_ sender: Any) {
         print("loging out")
         self.dismiss(animated: true, completion: nil)
