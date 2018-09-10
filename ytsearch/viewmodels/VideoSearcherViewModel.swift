@@ -22,12 +22,18 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
     let inset: CGFloat = 8.0
     let spacing: CGFloat = 8.0
 
-    private class URLFetcher: LRUFetcher<URL> {
-        override func fetch(key: URL, completion: ((Data?, Error?) -> Void)?) {
+    private class URLFetcher: LRUFetcher<URL, UIImage> {
+        override func fetch(key: URL, completion: ((UIImage?, Error?) -> Void)?) {
             let sessionFetcher = VideoService.shared.service.fetcherService.fetcher(withURLString: key.absoluteString)
             sessionFetcher.authorizer = VideoService.shared.service.authorizer
             sessionFetcher.beginFetch { (data, error) in
-                completion?(data, error)
+                if let error = error {
+                    completion?(nil, error)
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    completion?(image, nil)
+                }
             }
         }
     }
@@ -93,8 +99,7 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
         let videoDuration = video.duration ?? ""
         let title = (video.title ?? "") + " (" + videoDuration + ")"
         cell.title.text = title
-        cell.channel.text = video.channel?.title
-
+        cell.channel.text = video.channelTitle
         cell.channelImage.layer.borderWidth = 1
         cell.channelImage.layer.masksToBounds = false
         cell.channelImage.layer.borderColor = UIColor.lightGray.cgColor
@@ -116,45 +121,33 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 
             DispatchQueue.main.async {
 
-                let image = self.cache.getValue(key: url, completion: {(data, error) in
-                    //called if the image was nil
+                self.cache.getValue(key: url, completion: { (image, error) in
                     if let error = error {
                         print(error)
                         return
                     }
-                    if let data = data, let img = UIImage(data: data) {
-                        cell.thumbnailView.image = img
-                        self.cache.set(value: img, forKey: url) //set it on the LRUCache
+                    if let image = image {
+                        cell.thumbnailView.image = image
                     }
                 })
-
-                if let image = image {
-                    cell.thumbnailView.image = image
-                }
             }
         }
 
         //load channel thumbnail
         serialQueue.async {
-            guard let urlString = video.channel?.thumbnails?.high?.url else { return }
+            guard let urlString = video.channelThumbnails?.high?.url else { return }
             guard let url = URL(string: urlString) else { return }
 
             DispatchQueue.main.async {
-                let image = self.cache.getValue(key: url, completion: {(data, error) in
-                    //called if the image was nil
+                self.cache.getValue(key: url, completion: { (image, error) in
                     if let error = error {
                         print(error)
                         return
                     }
-                    if let data = data, let img = UIImage(data: data) {
-                        cell.channelImage.image = img
-                        self.cache.set(value: img, forKey: url) //set it on the LRUCache
+                    if let image = image {
+                        cell.channelImage.image = image
                     }
                 })
-
-                if let image = image {
-                    cell.channelImage.image = image
-                }
             }
         }
         return cell

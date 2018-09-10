@@ -70,6 +70,8 @@ class VideoService: NSObject {
 
             guard let response = obj as? GTLRYouTube_SearchListResponse else { return }
 
+            var videos = [YTVideo]()
+
             if let items = response.items {
                 for item in items {
 
@@ -79,21 +81,22 @@ class VideoService: NSObject {
                     video.date = item.snippet?.publishedAt?.date
                     video.thumbnails = item.snippet?.thumbnails
                     video.id = item.identifier?.videoId
+                    video.channelTitle = item.snippet?.channelTitle
+                    video.channelId = item.snippet?.channelId
 
+                    videos.append(video)
                     if let channelId = item.snippet?.channelId {
                         let channel = YTChannel()
-                        channel.id = item.snippet?.channelId
                         channel.title = item.snippet?.channelTitle
+                        channel.id = item.snippet?.channelId
                         channel.addVideo(video: video)
                         channelsDictionary[channelId] = channel
-                    }
-
-                    if let channelId = item.snippet?.channelId {
                         channelsIdentifier += "\(channelId)"
                         if index < items.count {
                             channelsIdentifier += ","
                         }
                     }
+                    
                     if let videoId = item.identifier?.videoId {
                         videosIdentifier += "\(videoId)"
                         if index < items.count {
@@ -103,62 +106,61 @@ class VideoService: NSObject {
                     index += 1
                 }
             }
-
-            //nest the queries so that we call the completion handler when all is done
-            //query the videos
-            let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "snippet,contentDetails")
-            videosQuery.identifier = videosIdentifier
-            self?.service.executeQuery(videosQuery) { [weak self] (ticket, obj, error) in
+            //query the channels
+            let channelsQuery = GTLRYouTubeQuery_ChannelsList.query(withPart: "snippet")
+            channelsQuery.identifier = channelsIdentifier
+            self?.service.executeQuery(channelsQuery) { [weak self] (ticket, obj, error) in
                 if let error = error {
-                    print("could not fetch videos \(error)")
+                    print("could not fetch channels \(error)")
                     return
                 }
-                var videos = [YTVideo]()
-                if let response = obj as? GTLRYouTube_VideoListResponse {
+                if let response = obj as? GTLRYouTube_ChannelListResponse {
                     if let items = response.items {
                         for item in items {
-                            if let channelId = item.snippet?.channelId,
-                                let channel = channelsDictionary[channelId], let videoId = item.identifier  {
-//                                print(item.contentDetails)
-                                let durationISO = item.contentDetails?.duration ?? ""
-                                let index = durationISO.index(durationISO.startIndex, offsetBy: 2)
-                                let temp = String(durationISO[index...])
-                                let components = temp.components(separatedBy: CharacterSet(charactersIn: "HSM"))
-                                var duration = ""
-                                if components.count == 4 {
-                                    let hours = components[0]
-                                    let minutes = components[1].count == 1 ? "0\(components[1])" : components[1]
-                                    let seconds = components[2].count == 1 ? "0\(components[2])" : components[2]
-                                    duration = "\(hours):\(minutes):\(seconds)"
-                                } else if components.count == 3 {
-                                    let minutes = components[0]
-                                    let seconds = components[1].count == 1 ? "0\(components[1])" : components[1]
-                                    duration = "\(minutes):\(seconds)"
-                                } else if components.count == 2 {
-                                    duration = components[0]
+                            if let channelId = item.identifier,
+                                let channel = channelsDictionary[channelId] {
+                                let videos = channel.getAllVideos()
+                                for video in videos {
+                                    video.channelThumbnails = item.snippet?.thumbnails
                                 }
-
-                                //TODO parse duration into a nicer format
-                                guard let video = channel.getVideo(with: videoId) else { continue }
-                                video.duration = duration
-                                videos.append(video)
                             }
                         }
                     }
                 }
-                //query the channels
-                let channelsQuery = GTLRYouTubeQuery_ChannelsList.query(withPart: "snippet")
-                channelsQuery.identifier = channelsIdentifier
-                self?.service.executeQuery(channelsQuery) { [weak self] (ticket, obj, error) in
+                let videosQuery = GTLRYouTubeQuery_VideosList.query(withPart: "snippet,contentDetails")
+                videosQuery.identifier = videosIdentifier
+                self?.service.executeQuery(videosQuery) { [weak self] (ticket, obj, error) in
                     if let error = error {
-                        print("could not fetch channels \(error)")
+                        print("could not fetch videos \(error)")
                         return
                     }
-                    if let response = obj as? GTLRYouTube_ChannelListResponse {
+
+                    if let response = obj as? GTLRYouTube_VideoListResponse {
                         if let items = response.items {
                             for item in items {
-                                if let channelId = item.identifier, let channel = channelsDictionary[channelId] {
-                                    channel.thumbnails = item.snippet?.thumbnails
+                                if let channelId = item.snippet?.channelId,
+                                    let channel = channelsDictionary[channelId], let videoId = item.identifier  {
+
+                                    let durationISO = item.contentDetails?.duration ?? ""
+                                    let index = durationISO.index(durationISO.startIndex, offsetBy: 2)
+                                    let temp = String(durationISO[index...])
+                                    let components = temp.components(separatedBy: CharacterSet(charactersIn: "HSM"))
+                                    var duration = ""
+                                    if components.count == 4 {
+                                        let hours = components[0]
+                                        let minutes = components[1].count == 1 ? "0\(components[1])" : components[1]
+                                        let seconds = components[2].count == 1 ? "0\(components[2])" : components[2]
+                                        duration = "\(hours):\(minutes):\(seconds)"
+                                    } else if components.count == 3 {
+                                        let minutes = components[0]
+                                        let seconds = components[1].count == 1 ? "0\(components[1])" : components[1]
+                                        duration = "\(minutes):\(seconds)"
+                                    } else if components.count == 2 {
+                                        duration = components[0]
+                                    }
+
+                                    guard let video = channel.getVideo(withId: videoId) else { continue }
+                                    video.duration = duration
                                 }
                             }
                         }

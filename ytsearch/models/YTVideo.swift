@@ -8,7 +8,9 @@
 
 import Foundation
 
+
 class YTVideo: Hashable {
+    
     var hashValue: Int {
         return id?.hashValue ?? 0
     }
@@ -20,11 +22,14 @@ class YTVideo: Hashable {
     var id: String?
     var description: String?
     var title: String?
-    var channel: YTChannel?
     var thumbnails: GTLRYouTube_ThumbnailDetails?
     var date: Date?
     var duration: String?
+    var channelId: String?
+    var channelThumbnails: GTLRYouTube_ThumbnailDetails?
+    var channelTitle: String?
 
+    
 //    init(with searchResult: GTLRYouTube_SearchResult) {
 //        description = searchResult.snippet?.descriptionProperty
 //        channelTitle = searchResult.snippet?.channelTitle

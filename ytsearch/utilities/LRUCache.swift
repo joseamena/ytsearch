@@ -2,8 +2,8 @@
 import Foundation
 
 
-class LRUFetcher<Type> {
-    func fetch(key: Type, completion: ((Data?, Error?) -> Void)?) {
+class LRUFetcher<Key, Value> {
+    func fetch(key: Key, completion: ((Value?, Error?) -> Void)?) {
 
     }
 }
@@ -96,7 +96,7 @@ class LRUCache<Key: Hashable, ValueType>: CustomStringConvertible {
     private var list : List<Key,ValueType>
     private let cacheSize : Int
     private var count = 0
-    public var fetcher: LRUFetcher<Key>?
+    public var fetcher: LRUFetcher<Key, ValueType>?
     
     init(size: Int) {
         dict = Dictionary<Key,Node<Key,ValueType>>()
@@ -105,24 +105,29 @@ class LRUCache<Key: Hashable, ValueType>: CustomStringConvertible {
     }
 
     //completion handler is only called if the key does not exist
-    func getValue(key: Key, completion: ((Data?, Error?) -> Void)?) -> ValueType? {
+    func getValue(key: Key, completion: ((ValueType?, Error?) -> Void)?) {
 
         //if we have it just return it
         if let node = dict[key] {
             list.remove(node: node)
             list.addHead(node: node)
-            return node.value
+            completion?(node.value, nil)
         }
 
         //otherwise fetch it return nil, and provide the data in the completion handler
         fetcher?.fetch(key: key, completion: { (data, error) in
+            if let error = error {
+                completion?(nil, error)
+                return
+            }
+            if let data = data {
+                self.set(value: data, forKey: key)
+            }
             completion?(data, error)
         })
-
-        return nil
     }
     
-    func set(value : ValueType, forKey key: Key) {
+    private func set(value : ValueType, forKey key: Key) {
         
         if let node = dict[key] {
             //key already exists update it and move it to front

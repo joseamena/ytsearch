@@ -18,11 +18,10 @@ class YTChannel {
     func addVideo(video: YTVideo) {
         if let id = video.id {
             videos[id] = video
-            video.channel = self
         }
     }
 
-    func getVideo(with id: String) -> YTVideo? {
+    func getVideo(withId id: String) -> YTVideo? {
         return videos[id]
     }
 
