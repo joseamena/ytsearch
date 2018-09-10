@@ -86,11 +86,19 @@ class VideoService: NSObject {
 
                     videos.append(video)
                     if let channelId = item.snippet?.channelId {
-                        let channel = YTChannel()
-                        channel.title = item.snippet?.channelTitle
-                        channel.id = item.snippet?.channelId
-                        channel.addVideo(video: video)
-                        channelsDictionary[channelId] = channel
+
+                        if let channel = channelsDictionary[channelId] {
+                            channel.title = item.snippet?.channelTitle
+                            channel.id = item.snippet?.channelId
+                            channel.addVideo(video: video)
+                        } else {
+                            let channel = YTChannel()
+                            channelsDictionary[channelId] = channel
+                            channel.title = item.snippet?.channelTitle
+                            channel.id = item.snippet?.channelId
+                            channel.addVideo(video: video)
+                        }
+
                         channelsIdentifier += "\(channelId)"
                         if index < items.count {
                             channelsIdentifier += ","

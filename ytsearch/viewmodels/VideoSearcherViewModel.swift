@@ -68,14 +68,14 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-//            serialQueue.async {
-//                let video = self.videos[indexPath.row]
-//                guard let videoURLString = video.thumbnails?.defaultProperty?.url else { return }
-//                let videoURL = URL(fileURLWithPath: videoURLString)
-//                _ = self.cache.getValue(key: videoURL, completion: { (data, error) -> Void in
-//                    
-//                })
-//            }
+            serialQueue.async {
+                let video = self.videos[indexPath.row]
+                guard let videoURLString = video.thumbnails?.defaultProperty?.url else { return }
+                let videoURL = URL(fileURLWithPath: videoURLString)
+                self.cache.getValue(key: videoURL, completion: { (image, error) -> Void in
+                    //nothing to do, we just want to prefetch
+                })
+            }
         }
     }
     
@@ -114,40 +114,35 @@ class VideoSearcherViewModel : NSObject, UICollectionViewDataSource, UICollectio
             cell.date.text = "Published on: " + dateString
         }
 
-        //load video thumbnail
         serialQueue.async {
-            guard let urlString = video.thumbnails?.high?.url else { return }
-            guard let url = URL(string: urlString) else { return }
-
-            DispatchQueue.main.async {
-
-                self.cache.getValue(key: url, completion: { (image, error) in
+            if let videoThumbnailUrlString = video.thumbnails?.high?.url,
+                let videoThumbnailUrl = URL(string: videoThumbnailUrlString) {
+                self.cache.getValue(key: videoThumbnailUrl) { (image, error) in
                     if let error = error {
                         print(error)
                         return
                     }
-                    if let image = image {
-                        cell.thumbnailView.image = image
+                    DispatchQueue.main.async {
+                        if let image = image {
+                            cell.thumbnailView.image = image
+                        }
                     }
-                })
+                }
             }
-        }
 
-        //load channel thumbnail
-        serialQueue.async {
-            guard let urlString = video.channelThumbnails?.high?.url else { return }
-            guard let url = URL(string: urlString) else { return }
-
-            DispatchQueue.main.async {
-                self.cache.getValue(key: url, completion: { (image, error) in
+            if let channelThumbnailUrlString = video.channelThumbnails?.high?.url,
+                let channelThumbnailUrl = URL(string: channelThumbnailUrlString) {
+                self.cache.getValue(key: channelThumbnailUrl) { (image, error) in
                     if let error = error {
                         print(error)
                         return
                     }
-                    if let image = image {
-                        cell.channelImage.image = image
+                    DispatchQueue.main.async {
+                        if let image = image {
+                            cell.channelImage.image = image
+                        }
                     }
-                })
+                }
             }
         }
         return cell
