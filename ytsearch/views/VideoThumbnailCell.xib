@@ -40,7 +40,6 @@
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNb-3v-O8U">
                                                         <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
-                                                        <color key="backgroundColor" red="0.95686274510000002" green="0.82878433380000005" blue="0.16459299999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="88" id="2xN-rv-47j"/>
                                                             <constraint firstAttribute="width" constant="88" id="YGl-CT-rq5"/>
@@ -95,10 +94,18 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▶️" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWp-AF-qag">
+                        <rect key="frame" x="138" y="99" width="24" height="27"/>
+                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="23"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="iWp-AF-qag" firstAttribute="centerY" secondItem="Nvq-xl-lkd" secondAttribute="centerY" id="H0y-Ma-i7a"/>
+                <constraint firstItem="iWp-AF-qag" firstAttribute="centerX" secondItem="Nvq-xl-lkd" secondAttribute="centerX" id="H1W-G1-AYs"/>
                 <constraint firstItem="mb2-Y1-We0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gn9-tt-Td8"/>
                 <constraint firstItem="mb2-Y1-We0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nJT-w4-YRn"/>
                 <constraint firstAttribute="bottom" secondItem="mb2-Y1-We0" secondAttribute="bottom" id="umu-V0-ZHv"/>
