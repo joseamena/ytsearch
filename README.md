@@ -32,12 +32,15 @@ After login, the search screen is displayed, enter a search term in the search b
 
 A maximum of 10 videos will show up.
 
-Change the phone rotation to make sure the app maintains a good layout, when in landscape it should show 2 videos per row.
-
 Do multiple search queries, check for issues in the video thumbnails.
+
+Do a searches as fast as you can to verify app still behaves properly.
+
+Click a video, while it is loading click another one, check that the last video clicked is the one that plays.
 
 Change the query type in the top right corner to: episode, movie or any, look that search results are different in each case.
 
 Use button in top left to logout and try to login again.
 
-Additional tests that need to be performed: test the app with a bad internet connection or disconnected.
+Test the app with a slow connection, background fetching and prefetching should make UI still be responsive while loading content, test for crashes
+
