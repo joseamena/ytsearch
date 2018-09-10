@@ -175,12 +175,8 @@ extension VideoSearcherViewModel: UICollectionViewDelegateFlowLayout {
         var height: CGFloat
 
         let minimumSpacing:CGFloat = 10.0
-        if UIDevice.current.orientation == UIDeviceOrientation.portrait ||
-            UIDevice.current.orientation == UIDeviceOrientation.portraitUpsideDown {
-            width = collectionView.frame.size.width - 2 * minimumSpacing
-        } else {
-            width = (collectionView.frame.size.width - 2 * minimumSpacing) / 2
-        }
+
+        width = collectionView.frame.size.width - 2 * minimumSpacing
 
         //TODO: fix hardcoded values
         height = width * 3 / 4  //the video ratio
