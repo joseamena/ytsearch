@@ -149,7 +149,8 @@ extension VideosViewController: VideoListViewModelDelegate {
             self.videosCollectionView.alpha = 0.5
         }
         activityIndicatorView.startAnimating()
-        if (!playerView.load(withVideoId: id)) {
+        let dict: [String: String] = ["origin": "http://www.youtube.com"]
+        if (!playerView.load(withVideoId: id, playerVars: dict)) {
             self.showAlert(message: "Error loading video")
             return
         }
